@@ -23,66 +23,40 @@ export async function POST(req, res) {
 
     //===========Insert Many=======================
 
-    // const result = await prisma.post.createMany({
-    //   data: [
-    //     {
-    //       authorId: 5,
-    //       parentId: 6,
-    //       title: "fdgd",
-    //       metaTitle: "dfsdfds",
-    //       slug: "fjdnbv",
-    //       summary: "jdfkg",
-    //       published: 1,
-    //       content: "fgdg",
-    //     },
-    //     {
-    //       authorId: 3,
-    //       parentId: 8,
-    //       title: "iyre",
-    //       metaTitle: "dfsdfds",
-    //       slug: "fjdnbv",
-    //       summary: "jdfkg",
-    //       published: 1,
-    //       content: "fgdg",
-    //     },
-    //     {
-    //       authorId: 4,
-    //       parentId: 9,
-    //       title: "hgdf",
-    //       metaTitle: "dfsdfds",
-    //       slug: "fjdnbv",
-    //       summary: "jdfkg",
-    //       published: 1,
-    //       content: "fgdg",
-    //     },
-    //   ],
-    // });
-
-    //=============Inserting with Relations====================
-
-    // const result = await prisma.user.create({
-    //   data: {
-    //     firstName: "Jim",
-    //     lastName: "Doe",
-    //     mobile: "01111111111",
-    //     email: "Jhon7@gmail.com",
-    //     passwordHash: "123",
-    //     intro: "kjdjfhejfge",
-    //     profile: "dfjhj",
-
-    //     post: {
-    //       create: {
-    //         parentId: 4,
-    //         title: "fvdfgd",
-    //         metaTitle: "dfsdfds",
-    //         slug: "fjdnbv",
-    //         summary: "jdfkg",
-    //         published: 1,
-    //         content: "fgdg",
-    //       },
-    //     },
-    //   },
-    // });
+    const result = await prisma.post.createMany({
+      data: [
+        {
+          authorId: 5,
+          parentId: 6,
+          title: "fdgd",
+          metaTitle: "dfsdfds",
+          slug: "fjdnbv",
+          summary: "jdfkg",
+          published: 1,
+          content: "fgdg",
+        },
+        {
+          authorId: 3,
+          parentId: 8,
+          title: "iyre",
+          metaTitle: "dfsdfds",
+          slug: "fjdnbv",
+          summary: "jdfkg",
+          published: 1,
+          content: "fgdg",
+        },
+        {
+          authorId: 4,
+          parentId: 9,
+          title: "hgdf",
+          metaTitle: "dfsdfds",
+          slug: "fjdnbv",
+          summary: "jdfkg",
+          published: 1,
+          content: "fgdg",
+        },
+      ],
+    });
 
     return NextResponse.json({ status: "success", data: result });
   } catch (e) {
@@ -98,16 +72,14 @@ export async function GET(req, res) {
     const prisma = new PrismaClient();
     //================READ===================
 
+    //=================findMany==============
+    const result = await prisma.post.findMany();
+
     //============findMany Where And Select=================
     // const result = await prisma.post.findMany({
     //   where: { title: "Prisma" },
     //   select: { id: true },
     // });
-
-    //============findUnique=================
-    // const result = await prisma.post.findUnique({
-    //     where: { title: "Prisma" },
-    //   });
 
     //============findFirst()=================
     //const result = await prisma.post.findFirst();
@@ -132,12 +104,12 @@ export async function GET(req, res) {
     // });
 
     //Retrieve the last 5 users
-    const result = await prisma.post.findMany({
-      orderBy: {
-        id: "desc",
-      },
-      take: 5,
-    });
+    // const result = await prisma.post.findMany({
+    //   orderBy: {
+    //     id: "desc",
+    //   },
+    //   take: 5,
+    // });
     return NextResponse.json({ status: "success", data: result });
   } catch (e) {
     return NextResponse.json({ status: "fail", data: e });
@@ -155,12 +127,12 @@ export async function PUT(req, res) {
       where: { id: 4 },
       data: {
         parentId: 4,
-            title: "Prisma",
-            metaTitle: "dfsdfds",
-            slug: "fjdnbv",
-            summary: "jdfkg",
-            published: 1,
-            content: "fgdg",
+        title: "Prisma",
+        metaTitle: "dfsdfds",
+        slug: "fjdnbv",
+        summary: "jdfkg",
+        published: 1,
+        content: "fgdg",
       },
     });
     return NextResponse.json({ status: "success", data: result });

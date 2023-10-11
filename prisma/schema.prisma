@@ -78,7 +78,7 @@ model post_tag {
 model post_meta {
   id      BigInt @id @default(autoincrement()) @db.UnsignedBigInt
   postId  BigInt @db.UnsignedBigInt
-  keey    String @db.VarChar(50)
+  key     String @db.VarChar(50)
   content String @db.Text
   post    post   @relation(fields: [postId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }

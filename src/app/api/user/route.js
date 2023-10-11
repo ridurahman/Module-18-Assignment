@@ -94,6 +94,9 @@ export async function GET(req, res) {
     const prisma = new PrismaClient();
     //================READ===================
 
+    //=================findMany==============
+    const result = await prisma.user.findMany();
+
     //============findMany Where And Select=================
     // const result = await prisma.user.findMany({
     //   where: { mobile: "01111111111" },
@@ -128,12 +131,12 @@ export async function GET(req, res) {
     // });
 
     //Retrieve the last 5 users
-    const result = await prisma.user.findMany({
-      orderBy: {
-        id: "desc",
-      },
-      take: 5,
-    });
+    // const result = await prisma.user.findMany({
+    //   orderBy: {
+    //     id: "desc",
+    //   },
+    //   take: 5,
+    // });
     return NextResponse.json({ status: "success", data: result });
   } catch (e) {
     return NextResponse.json({ status: "fail", data: e });
